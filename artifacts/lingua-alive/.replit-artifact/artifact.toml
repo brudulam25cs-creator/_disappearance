@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "LinguaAlive"
+version = "1.0.0"
+id = "artifacts/lingua-alive"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25661
+
+[services.development]
+run = "pnpm --filter @workspace/lingua-alive run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/lingua-alive", "run", "build" ]
+publicDir = "artifacts/lingua-alive/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25661"
+BASE_PATH = "/"
